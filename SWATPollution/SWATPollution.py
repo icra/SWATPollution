@@ -59,10 +59,10 @@ class SWATPollution:
             with importlib.resources.path("SWATPollution.rivs1", "") as rivs1_path:
                 rivs1_path = rivs1_path.resolve()
                 channels_geom_path = rivs1_path / 'canals_tot_ci.shp'
-                gdf = gpd.read_file(channels_geom_path, driver="ESRI Shapefile")
+                gdf = gpd.read_file(channels_geom_path)
                 observacions_conca = observacions_from_conca(channels_geom_path, observacions, conca)
         else:
-            gdf = gpd.read_file(channels_geom_path, driver="ESRI Shapefile")
+            gdf = gpd.read_file(channels_geom_path)
             observacions_conca = observacions_from_conca(channels_geom_path, observacions, conca)
 
                 

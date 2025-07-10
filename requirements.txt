@@ -8,3 +8,6 @@ plotly
 bokeh
 geoviews
 openpyxl
+pySWATPlus
+pyarrow
+psycopg2
