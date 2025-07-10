@@ -18,7 +18,6 @@ setup(
         'geoviews',
         'openpyxl',
     ],    
-    include_package_data=True,
     author='Joan Saló',
     description='Python class to interact with SWAT pollution module',
     url="https://github.com/icra/SWATPollution.git",
