@@ -4,10 +4,8 @@ from setuptools import setup, find_packages
 setup(
     name="SWATPollution",
     version="1.0",
-    package_data={
-        "SWATPollution": ["lod.xlsx", "rivs1/*"],
-    },
-    include_package_data=True,
+    packages=find_packages(),
+    include_package_data=True,    
     install_requires=[
         'networkx',
         'ipykernel',
@@ -25,5 +23,5 @@ setup(
     ],
     author='Joan Saló',
     description='Python class to interact with SWAT pollution module',
-    url="https://github.com/icra/SWATPollution.git",
+    url="https://github.com/icra/SWATPollution",
 )

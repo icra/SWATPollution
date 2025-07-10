@@ -1,2 +1,2 @@
-include SWATPollution/lod.xlsx
-recursive-include SWATPollution/rivs1 *
+recursive-include SWATPollution *.xlsx
+recursive-include SWATPollution/rivs1 *.shp *.shx *.dbf *.prj *.cpg
