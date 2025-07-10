@@ -12,6 +12,7 @@ from .pollution_utils import observacions_from_conca, generate_pollution_observa
 from pySWATPlus.TxtinoutReader import TxtinoutReader
 from pathlib import Path
 import importlib.resources
+from SWATPollution import rivs1
 
 def nse(observations, predictions):
     return 1 - (sum((observations - predictions)**2) / sum((observations - observations.mean())**2))
@@ -56,11 +57,9 @@ class SWATPollution:
 
         if channels_geom_path is None:
             # Access the 'inputs' directory inside the installed package
-            with importlib.resources.path("SWATPollution.rivs1", "") as rivs1_path:
-                rivs1_path = rivs1_path.resolve()
-                channels_geom_path = rivs1_path / 'canals_tot_ci.shp'
-                gdf = gpd.read_file(channels_geom_path)
-                observacions_conca = observacions_from_conca(channels_geom_path, observacions, conca)
+            with importlib.resources.path(rivs1, "canals_tot_ci.shp") as shp_path:
+                gdf = gpd.read_file(shp_path)
+                observacions_conca = observacions_from_conca(shp_path, observacions, conca)
         else:
             gdf = gpd.read_file(channels_geom_path)
             observacions_conca = observacions_from_conca(channels_geom_path, observacions, conca)

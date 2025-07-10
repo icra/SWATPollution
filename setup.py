@@ -4,7 +4,9 @@ from setuptools import setup, find_packages
 setup(
     name="SWATPollution",
     version="1.0",
-    packages=find_packages(),
+    package_data={
+        "SWATPollution": ["lod.xlsx", "rivs1/*"],
+    },
     include_package_data=True,
     install_requires=[
         'networkx',

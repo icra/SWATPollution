@@ -1,0 +1,2 @@
+include SWATPollution/lod.xlsx
+recursive-include SWATPollution/rivs1 *
