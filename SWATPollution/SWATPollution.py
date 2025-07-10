@@ -12,7 +12,7 @@ from .pollution_utils import observacions_from_conca, generate_pollution_observa
 from pySWATPlus.TxtinoutReader import TxtinoutReader
 from pathlib import Path
 import importlib.resources
-from SWATPollution import rivs1
+from . import rivs1
 
 def nse(observations, predictions):
     return 1 - (sum((observations - predictions)**2) / sum((observations - observations.mean())**2))
