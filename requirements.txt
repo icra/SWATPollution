@@ -11,3 +11,4 @@ openpyxl
 pySWATPlus
 pyarrow
 psycopg2-binary
+pyyaml

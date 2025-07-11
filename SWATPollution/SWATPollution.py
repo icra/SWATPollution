@@ -132,7 +132,7 @@ class SWATPollution:
                  warmup: int | None = 1
 
     ):
-
+        
         if not tmp_path:
             tmp_path = os.path.join('data', 'txtinouts', 'tmp')
         
@@ -289,20 +289,16 @@ class SWATPollution:
             
         self.df_error = df_error
 
-        try:
-            #self.error = mean_squared_error(df_error['obs'].values, df_error['pred'].values, squared=False)
-            self.error = -1 * r2_score(df_error['obs'].values, df_error['pred'].values)
-
-            self.rmse = mean_squared_error(df_error['obs'].values, df_error['pred'].values, squared=False) * 1e6
-            self.mape = mean_absolute_percentage_error(df_error['obs'].values, df_error['pred'].values)
-            self.nse = nse(df_error['obs'].values, df_error['pred'].values)
-            self.pbias = pbias(df_error['obs'].values, df_error['pred'].values)
-            self.rsr = rsr(df_error['obs'].values, df_error['pred'].values)
+            
+        self.error = -1 * r2_score(df_error['obs'].values, df_error['pred'].values) #negated r2 score
+        #self.rmse = mean_squared_error(df_error['obs'].values, df_error['pred'].values, squared=False) * 1e6
+        self.mape = mean_absolute_percentage_error(df_error['obs'].values, df_error['pred'].values)
+        self.nse = nse(df_error['obs'].values, df_error['pred'].values)
+        self.pbias = pbias(df_error['obs'].values, df_error['pred'].values)
+        self.rsr = rsr(df_error['obs'].values, df_error['pred'].values)
 
 
-        except:
-            self.error = np.nan
-        
+
 
         self.river_map = gdf
         self.gdf_map = gdf_map
@@ -536,8 +532,6 @@ class SWATPollution:
         predictions_channel = predictions[predictions['gis_id'] == gis_id][['ng_l', 'Date', 'flo_out']]
         observations_channel = observations[observations['gis_id'] == gis_id].copy()
 
-        print(observations_channel.estacion.unique())
-
         observations_channel['color'] = observations_channel['origen'].apply(lambda x: '#0d920d' if x == 'aca' else '#fe7c09')
         observations_channel['origen'] = observations_channel['origen'].apply(lambda x: 'Observations by ACA' if x == 'aca' else 'Observations by ICRA')
         observations_channel = observations_channel.rename(columns = {'valor_ng_l':'observacio (ng/l)'})
@@ -661,8 +655,6 @@ class SWATPollution:
 
         predictions_channel = predictions[predictions['gis_id'] == gis_id][['ng_l', 'Date', 'flo_out']]
         observations_channel = observations[observations['gis_id'] == gis_id].copy()
-
-        print(observations_channel.estacion.unique())
 
         rmse = self.rmse
         upper_bound = predictions_channel['ng_l'] + 2*rmse
