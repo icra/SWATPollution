@@ -28,6 +28,91 @@ def rsr(observations, predictions):
     
 
 class SWATPollution:
+    """
+    Class to manage the setup and optional execution of a SWAT simulation 
+    for contaminant transport in a specified watershed.
+
+    Parameters
+    ----------
+    conca : str
+        Name of the watershed to be modeled. Valid options include 'muga', 'fluvia', 'ter', 
+        'llobregat', 'besos', 'tordera', 'sud'.
+
+    contaminant : str
+        Name of the pollutant to simulate (e.g., 'Venlafaxina', 'Ciprofloxacina').
+
+    txtinout_folder : str or Path
+        Path to the directory containing the SWAT txtinout files.
+
+    channels_geom_path : str or Path, optional
+        Path to the shapefile representing the channel geometry. If None, a default file is used.
+
+    tmp_path : str or Path, optional
+        Temporary directory where txtinout files will be copied before execution (only if `run=True`).
+
+    run : bool, optional
+        If True, prepares and runs the SWAT model. Defaults to False.
+
+    compound_features : dict, optional
+        Dictionary specifying SWAT file modifications. 
+        Format: {'filename': (id_col, [(id, col, value)])}.
+
+    show_output : bool, optional
+        If True, shows the output logs of the SWAT run. Defaults to True.
+
+    copy_txtinout : bool, optional
+        If True, copies txtinout files to `tmp_path` before execution (only if `run=True`).
+
+    overwrite_txtinout : bool, optional
+        If True, allows overwriting existing files in `tmp_path` (only if `run=True`).
+
+    observacions : pd.DataFrame, optional
+        Observational data for calibration and evaluation. If None, loads default observations.
+
+    lod_path : str or Path, optional
+        Path to the file containing limits of detection (LOD). If None, uses the default.
+
+    year_start : int, optional
+        Start year of the simulation. Defaults to 2000. Used only if `run=True`.
+
+    year_end : int, optional
+        End year of the simulation. Defaults to 2022. Used only if `run=True`.
+
+    warmup : int, optional
+        Number of warm-up years. Defaults to 1. Used only if `run=True`.
+
+    Example
+    -------
+    >>> from pathlib import Path
+    >>> import pandas as pd
+    >>> contaminant = 'Venlafaxina'
+    >>> conca = 'besos'
+    >>> cwd = Path('C:/Users/joans/OneDrive/Escriptori/icra/traca_contaminacio/traca_contaminacio')
+    >>> txtinout_folder = cwd / 'data' / 'txtinouts' / 'tmp' / contaminant / conca
+    >>> channels_geom_path = cwd / 'data' / 'rivs1' / 'canals_tot_ci.shp'
+    >>> recall_points_path = cwd.parent / 'traca' / 'traca' / 'inputs compound generator' / 'inputs' / 'recall_points.xlsx'
+    >>> recall_points_df = pd.read_excel(recall_points_path)
+    >>> edars = recall_points_df[recall_points_df['conca'] == conca][['lat', 'lon', 'edar_code']].dropna()
+    >>> observacions = generate_pollution_observations(contaminant)
+    >>> df = observacions_from_conca(channels_geom_path, observacions, conca)
+    >>> first_observation = df.year.min()
+    >>> year_end = 2022
+    >>> year_start = max(first_observation - 3, 2000)
+    >>> warmup = max(1, first_observation - year_start)
+    >>> swatpy = SWATPollution(
+    ...     conca=conca,
+    ...     contaminant=contaminant,
+    ...     txtinout_folder=txtinout_folder,
+    ...     channels_geom_path=channels_geom_path,
+    ...     run=False,
+    ...     year_start=year_start,
+    ...     year_end=year_end,
+    ...     warmup=warmup,
+    ...     observacions=observacions
+    ... )
+    """
+    
+    
 
     def __init__(self, 
                  conca: str, 
