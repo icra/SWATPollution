@@ -19,7 +19,7 @@ setup(
         'openpyxl',
         'pySWATPlus',
         'pyarrow',
-        'psycopg2'
+        'psycopg2-binary'
     ],
     author='Joan Saló',
     description='Python class to interact with SWAT pollution module',
