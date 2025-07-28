@@ -3,10 +3,10 @@
 The `SWATPollution` class is designed to manage the setup and optional execution of a SWAT+ simulation for modeling contaminant transport in a specified watershed. It facilitates input preparation, parameter configuration, and integration of observational data for analysis and calibration.
 
 > **This code was developed for the paper:**  
-> **[Integrated modeling of the generation, attenuation, and transport of point-source pollutants at the watershed-scale using SWAT+](https://www.sciencedirect.com/science/article/abs/pii/S1364815225003159)**
+> [**Integrated modeling of the generation, attenuation, and transport of point-source pollutants at the watershed-scale using SWAT+**](https://www.sciencedirect.com/science/article/abs/pii/S1364815225003159)  
+>
 > **Library used:**  
 > [`pyswatplus`](https://github.com/swat-model/pySWATPlus) – Python interface for SWAT+ modeling and file handling.
-
 ---
 
 ## Features
